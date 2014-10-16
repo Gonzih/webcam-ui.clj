@@ -1,10 +1,10 @@
 # webcam-ui
 
-A Clojure library designed to ... well, that part is up to you.
+A Clojure library designed to show pictures!
 
 ## Usage
 
-FIXME
+lein ring server
 
 ## License
 
