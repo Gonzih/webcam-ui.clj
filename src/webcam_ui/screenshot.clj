@@ -1,6 +1,7 @@
-(ns webcam-ui.screenshot)
+(ns webcam-ui.screenshot
+  (:require [clojure.java.shell :as shell]))
 
 (defn take-screenshot! []
-  (clojure.java.shell/sh
+  (shell/sh
     "mplayer" "-vo" "png" "-frames" "1" "tv://"
     :dir "/tmp"))
