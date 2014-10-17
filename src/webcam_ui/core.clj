@@ -78,8 +78,8 @@
 (defn in-dev? [_] true)
 
 (defn -main [& args] ;; entry point, lein run will pick up and start from here
-  (start-broadcaster!)
   (start-image-generator!)
+  (start-broadcaster!)
   (let [handler (if (in-dev? args)
                   (reload/wrap-reload (site #'app)) ;; only reload when dev
                   (site app))]
