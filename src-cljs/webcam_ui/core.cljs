@@ -8,6 +8,9 @@
 
 (enable-console-print!)
 
+(declare event-msg-handler
+         data-handler)
+
 (defonce user-id (atom 1))
 
 ;;; Add this: --->
