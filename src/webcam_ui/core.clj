@@ -31,10 +31,13 @@
 
 (defn start-image-generator! []
   (future
-    (when (< 0 (count (:any @connected-uids)))
-      (println "Taking screenshot")
-      (take-screenshot!)
-      (put! data-chan (read-src-data!)))))
+    (loop []
+      (when (< 0 (count (:any @connected-uids)))
+        (println "Taking screenshot")
+        (take-screenshot!)
+        (put! data-chan (read-src-data!)))
+      (Thread/sleep 1000)
+      (recur))))
 
 (defn start-broadcaster! []
   (println "Starting broadcaster")
@@ -63,13 +66,8 @@
   (let [src (read-src-data!)]
     (layout (str "<img id='target' src='" src "'/>"))))
 
-(defn ping-handler [req]
-  (start-image-generator!)
-  "hello")
-
 (defroutes main-handler; {{{
   (GET "/" [] index-handler)
-  (GET "/ping" [] ping-handler)
   (GET  "/chsk" req (ring-ajax-get-or-ws-handshake req))
   (POST "/chsk" req (ring-ajax-post                req))); }}}
 
@@ -81,6 +79,7 @@
 
 (defn -main [& args] ;; entry point, lein run will pick up and start from here
   (start-broadcaster!)
+  (start-image-generator!)
   (let [handler (if (in-dev? args)
                   (reload/wrap-reload (site #'app)) ;; only reload when dev
                   (site app))]
