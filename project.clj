@@ -13,7 +13,7 @@
                  [javax.servlet/servlet-api "2.5"]]
   :plugins [[lein-cljsbuild "1.0.3"]
             [lein-figwheel "0.1.4-SNAPSHOT"]]
-  ;:hooks [leiningen.cljsbuild]
+  :hooks [leiningen.cljsbuild]
   :ring {:handler webcam-ui.core/app}
   :main webcam-ui.core
   :cljsbuild {:builds [{:id "dev"
