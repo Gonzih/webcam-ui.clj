@@ -36,7 +36,7 @@
         (println "Taking screenshot")
         (take-screenshot!)
         (put! data-chan (read-src-data!)))
-      (Thread/sleep 1000)
+      (Thread/sleep 2000)
       (recur))))
 
 (defn start-broadcaster! []
