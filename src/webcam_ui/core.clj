@@ -4,7 +4,7 @@
     [webcam-ui.screenshot :refer :all]
     [compojure.core :refer [defroutes GET POST]]
     [compojure.handler :refer [site]]
-    [clojure.core.async :as async :refer [go go-loop <! chan put!]]
+    [clojure.core.async :as async :refer [go go-loop <! chan >!!]]
     [org.httpkit.server :refer [run-server]]
     [ring.middleware.file :refer [wrap-file]]
     [ring.middleware.reload :as reload]
@@ -35,8 +35,7 @@
       (when (< 0 (count (:any @connected-uids)))
         (println "Taking screenshot")
         (take-screenshot!)
-        (put! data-chan (read-src-data!)))
-      (Thread/sleep 2000)
+        (>!! data-chan (read-src-data!)))
       (recur))))
 
 (defn start-broadcaster! []
