@@ -4,7 +4,11 @@ A Clojure library designed to show pictures!
 
 ## Usage
 
-lein ring server
+Dependencies:
+* mplayer executable on path
+* webcam :)
+
+lein ring
 
 ## License
 
