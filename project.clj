@@ -16,6 +16,7 @@
   :hooks [leiningen.cljsbuild]
   :ring {:handler webcam-ui.core/app}
   :main webcam-ui.core
+  :jvm-opts []
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src-cljs/webcam_ui"]
                         :compiler {:output-to "resources/public/javascripts/webcam_ui.js"
