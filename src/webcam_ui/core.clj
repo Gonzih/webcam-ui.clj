@@ -61,7 +61,6 @@
         </html>")); }}}
 
 (defn index-handler [{:keys [session remote-addr]}]
-  ; (take-screenshot!)
   (let [src (read-src-data!)
         new-session (assoc session :uid remote-addr)]
     (-> (layout (str "<img id='target' src='" src "'/>"))
@@ -80,6 +79,7 @@
 (defn in-dev? [_] true)
 
 (defn -main [& args] ;; entry point, lein run will pick up and start from here
+  (take-screenshot!)
   (start-image-generator!)
   (start-broadcaster!)
   (let [handler (if (in-dev? args)
