@@ -60,10 +60,13 @@
        "</doby>
         </html>")); }}}
 
-(defn index-handler [req]
+(defn index-handler [{:keys [session remote-addr] :as req}]
   ; (take-screenshot!)
-  (let [src (read-src-data!)]
-    (layout (str "<img id='target' src='" src "'/>"))))
+  (let [src (read-src-data!)
+        new-session (assoc session :uid remote-addr)]
+    (-> (layout (str "<img id='target' src='" src "'/>"))
+        response
+        (assoc :session new-session))))
 
 (defroutes main-handler; {{{
   (GET "/" [] index-handler)
