@@ -60,7 +60,7 @@
        "</doby>
         </html>")); }}}
 
-(defn index-handler [{:keys [session remote-addr] :as req}]
+(defn index-handler [{:keys [session remote-addr]}]
   ; (take-screenshot!)
   (let [src (read-src-data!)
         new-session (assoc session :uid remote-addr)]
